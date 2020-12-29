@@ -1,0 +1,183 @@
+<section id="cart_items">
+  <div class="container">
+    <div class="breadcrumbs">
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">Manage Products</li>
+      </ol>
+    </div>
+    <!--/breadcrums-->
+
+    <div class="shopper-informations">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="shopper-info">
+            <p>Add Products</p>
+            <form [formGroup]="manageProduct" (ngSubmit)="submit()">
+              <input
+                type="text"
+                formControlName="itemName"
+                placeholder="Item Name"
+              />
+              <div *ngIf="manageProduct.controls['itemName'].errors">
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    manageProduct.controls['itemName'].touched &&
+                    manageProduct.controls['itemName'].errors.required
+                  "
+                >
+                  please fill the required details
+                </div>
+              </div>
+              <input
+                type="number"
+                formControlName="price"
+                placeholder="Price"
+              />
+              <div *ngIf="manageProduct.controls['price'].errors">
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    manageProduct.controls['price'].touched &&
+                    manageProduct.controls['price'].errors.required
+                  "
+                >
+                  please fill the required details
+                </div>
+              </div>
+              <select formControlName="category">
+                <option value="" disabled selected hidden>
+                  Select Category
+                </option>
+                <option value="clothes">Clothes</option>
+                <option value="electronics">Electronics</option>
+                <option value="jewellery">Jewellery</option>
+              </select>
+
+              <div *ngIf="manageProduct.controls['category'].errors">
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    manageProduct.controls['category'].touched &&
+                    manageProduct.controls['category'].errors.required
+                  "
+                >
+                  please select one category.
+                </div>
+              </div>
+
+              <label for="file" class="text-warning">Select File</label>
+              <input
+                type="file"
+                formControlName="image"
+                placeholder="Image"
+                (change)="onSelectFile($event)"
+                required
+              />
+              <div *ngIf="manageProduct.controls['image'].errors">
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    manageProduct.controls['image'].touched &&
+                    manageProduct.controls['image'].errors.required
+                  "
+                >
+                  please select one file.
+                </div>
+              </div>
+              <input
+                type="text"
+                formControlName="description"
+                placeholder="Description"
+              />
+              <div *ngIf="manageProduct.controls['description'].errors">
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    manageProduct.controls['description'].touched &&
+                    manageProduct.controls['description'].errors.required
+                  "
+                >
+                  please fill required details.
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    manageProduct.controls['description'].errors?.minlength
+                  "
+                >
+                  description should be of min length 15 charector.
+                </div>
+              </div>
+              <button
+                class="btn btn-warning"
+                [disabled]="!manageProduct.valid"
+                type="submit"
+              >
+                {{ btn }}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-8">
+          <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+              <thead>
+                <tr class="cart_menu">
+                  <td class="image">Item_Image</td>
+                  <td class="description">ItemName</td>
+                  <td class="price">Price</td>
+                  <td class="quantity">Quantity</td>
+                  <td class="total">Total</td>
+                  <td>Delete</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let products of products">
+                  <td class="cart_product">
+                    <img
+                      width="100px"
+                      height="100px"
+                      src="http://localhost:3000/images/{{ products.image }}"
+                      alt="img"
+                    />
+                  </td>
+                  <td class="cart_description">
+                    <h4>
+                      {{ products.itemName }}
+                    </h4>
+                  </td>
+                  <td class="cart_price">
+                    <p>{{ products.price | currency: "INR" }}</p>
+                  </td>
+                  <td class="cart_quantity">
+                    <button
+                      class="btn btn-primary"
+                      (click)="updateProduct(products._id)"
+                    >
+                      Update
+                    </button>
+                  </td>
+                  <td class="cart_total">
+                    <p class="cart_total_price">
+                      {{ products.price | currency: "INR" }}
+                    </p>
+                  </td>
+                  <td class="cart_delete">
+                    <a
+                      class="btn cart_quantity_delete"
+                      (click)="delete(products._id)"
+                      ><i class="fa fa-times"></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

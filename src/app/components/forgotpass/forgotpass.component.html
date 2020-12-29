@@ -1,0 +1,28 @@
+<div style="width: 600px; margin: 200px auto">
+  <h3 class="text-center">you need to verify your email first!</h3>
+  <form [formGroup]="vEmail" (ngSubmit)="verify()">
+    <div class="form-group">
+      <label for="email">very Email</label>
+      <input type="text" formControlName="email" class="form-control" />
+    </div>
+    <div *ngIf="vEmail.controls['email'].errors">
+      <div
+        class="text-left text-danger"
+        *ngIf="
+          vEmail.controls['email'].touched &&
+          vEmail.controls['email'].errors.required
+        "
+      >
+        please fill the required details
+      </div>
+      <div
+        class="text-left text-danger"
+        *ngIf="vEmail.controls['email'].errors?.pattern"
+      >
+        please give correct email address
+      </div>
+    </div>
+    <button class="btn btn-success" type="submit">verify</button>
+    <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
+  </form>
+</div>

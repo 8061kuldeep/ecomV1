@@ -1,0 +1,29 @@
+<div style="width: 600px; margin: 200px auto">
+  <h3 class="text-center">please fill the updated password here</h3>
+  <form [formGroup]="updatepass" (ngSubmit)="update()">
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="text" formControlName="password" class="form-control" />
+      <div *ngIf="updatepass.controls['password'].errors">
+        <div
+          class="text-left text-danger"
+          *ngIf="
+            updatepass.controls['password'].touched &&
+            updatepass.controls['password'].errors.required
+          "
+        >
+          please fill the required details
+        </div>
+        <div
+          class="text-left text-danger"
+          *ngIf="updatepass.controls['password'].errors?.minlength"
+        >
+          password should be of min length 5 charector
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">update</button>
+    <div class="alert alert-warning" *ngIf="message">{{ message }}</div>
+  </form>
+</div>
