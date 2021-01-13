@@ -1,0 +1,184 @@
+<section id="form">
+  <!--form-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <div class="login-form">
+          <!--login form-->
+          <h2>Login to your account</h2>
+
+          <form [formGroup]="login" (ngSubmit)="loginCheck()">
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Email Address"
+            />
+            <div *ngIf="login.controls['email'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  login.controls['email'].touched &&
+                  login.controls['email'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+              <div
+                class="text-left text-danger"
+                *ngIf="login.controls['email'].errors?.pattern"
+              >
+                please give correct email address
+              </div>
+            </div>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Password"
+            />
+            <div *ngIf="login.controls['password'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  login.controls['password'].touched &&
+                  login.controls['password'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+            </div>
+            <div *ngIf="message">
+              <div class="alert alert-danger">{{ message }}</div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-default"
+              [disabled]="!login.valid"
+            >
+              Sign-in
+            </button>
+            <a class="btn" (click)="forgotPass()">Forgot Password</a>
+          </form>
+          <div *ngIf="isLoading" style="font-size: x-large">loading....</div>
+        </div>
+
+        <!--/login fodivrm-->
+      </div>
+      <div class="col-sm-1">
+        <h2 class="or">OR</h2>
+      </div>
+      <div class="col-sm-4">
+        <div class="signup-form">
+          <!--sign up form-->
+          <h2>New User Sign-up!</h2>
+          <form [formGroup]="signup" (ngSubmit)="submit()">
+            <input type="text" formControlName="name" placeholder="Name" />
+            <div *ngIf="signup.controls['name'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  signup.controls['name'].touched &&
+                  signup.controls['name'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+            </div>
+            <input type="email" formControlName="email" placeholder="Email" />
+            <div *ngIf="signup.controls['email'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  signup.controls['email'].touched &&
+                  signup.controls['email'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+              <div
+                class="text-left text-danger"
+                *ngIf="signup.controls['email'].errors?.pattern"
+              >
+                please give correct email address
+              </div>
+            </div>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Password"
+            />
+            <div *ngIf="signup.controls['password'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  signup.controls['password'].touched &&
+                  signup.controls['password'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+              <div
+                class="text-left text-danger"
+                *ngIf="signup.controls['password'].errors?.minlength"
+              >
+                password should be of min length 5 charector
+              </div>
+            </div>
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              placeholder="confirmPassword"
+            />
+            <div *ngIf="signup.controls['confirmPassword'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  signup.controls['confirmPassword'].touched &&
+                  signup.controls['confirmPassword'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+              <div
+                class="text-left text-danger"
+                *ngIf="signup.controls['confirmPassword'].errors?.minlength"
+              >
+                confirmPassword should be of min length 5 charector
+              </div>
+            </div>
+            <input
+              type="text"
+              formControlName="profile"
+              placeholder="Profile"
+            />
+            <div *ngIf="signup.controls['profile'].errors">
+              <div
+                class="text-left text-danger"
+                *ngIf="
+                  signup.controls['profile'].touched &&
+                  signup.controls['profile'].errors.required
+                "
+              >
+                please fill the required details
+              </div>
+            </div>
+
+            <div *ngIf="messagesignup">
+              <div class="alert alert-danger">{{ messagesignup }}</div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-default"
+              [disabled]="!signup.valid"
+            >
+              Sign-up
+            </button>
+          </form>
+        </div>
+        <!--/sign up form-->
+      </div>
+    </div>
+  </div>
+</section>
+<!--/form-->

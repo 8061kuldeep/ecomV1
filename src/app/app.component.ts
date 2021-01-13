@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { HeaderComponent } from './components/header/header.component';
-import { TransportService } from './services/transport.service';
+import { TransportService } from './shared/services/transport.service';
+import { AdminService } from './admin/adminservice/admin.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,13 @@ import { TransportService } from './services/transport.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private transport: TransportService) {}
+  constructor(
+    private transport: TransportService,
+    private adminService: AdminService
+  ) {}
   title = 'Ecommerce';
   ngOnInit() {
     this.transport.autoAuthUser();
+    this.adminService.autoAuthentication();
   }
 }

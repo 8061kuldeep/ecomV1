@@ -1,0 +1,53 @@
+<div style="width: 500px; margin: 100px auto">
+  <div class="login-form">
+    <!--login form-->
+    <h2>Admin Login</h2>
+
+    <form [formGroup]="login" (ngSubmit)="loginCheck()">
+      <input type="email" formControlName="email" placeholder="Email Address" />
+      <div *ngIf="login.controls['email'].errors">
+        <div
+          class="text-left text-danger"
+          *ngIf="
+            login.controls['email'].touched &&
+            login.controls['email'].errors.required
+          "
+        >
+          please fill the required details
+        </div>
+        <div
+          class="text-left text-danger"
+          *ngIf="login.controls['email'].errors?.pattern"
+        >
+          please give correct email address
+        </div>
+      </div>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <div *ngIf="login.controls['password'].errors">
+        <div
+          class="text-left text-danger"
+          *ngIf="
+            login.controls['password'].touched &&
+            login.controls['password'].errors.required
+          "
+        >
+          please fill the required details
+        </div>
+      </div>
+      <!-- <div *ngIf="message">
+      <div class="alert alert-danger">{{ message }}</div>
+    </div> -->
+
+      <button type="submit" class="btn btn-default" [disabled]="!login.valid">
+        Sign-in
+      </button>
+    </form>
+    <div *ngIf="isLoding">
+      <h2>Loding...</h2>
+    </div>
+  </div>
+</div>

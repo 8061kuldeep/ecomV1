@@ -1,0 +1,114 @@
+<section id="cart_items">
+  <div class="container">
+    <div class="breadcrumbs">
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li class="active">Manage Category</li>
+      </ol>
+    </div>
+    <!--/breadcrums-->
+
+    <div class="shopper-informations">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="shopper-info">
+            <p>Add Category</p>
+            <form [formGroup]="category" (ngSubmit)="submit()">
+              <input
+                type="text"
+                formControlName="category"
+                placeholder="enter category"
+              />
+              <div *ngIf="category.controls['category'].errors">
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    category.controls['category'].touched &&
+                    category.controls['category'].errors.required
+                  "
+                >
+                  please fill the required details
+                </div>
+              </div>
+
+              <button
+                class="btn btn-warning"
+                [disabled]="!category.valid"
+                type="submit"
+              >
+                {{ btn }}
+              </button>
+              <div *ngIf="message" class="alert alert-success">
+                {{ message }}
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-7">
+          <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+              <thead>
+                <tr class="cart_menu">
+                  <td>Category</td>
+                  <td>Update</td>
+                  <td>Delete</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let catdetails of catdetails">
+                  <td class="cart_product">{{ catdetails.category }}</td>
+
+                  <td class="cart_quantity">
+                    <button
+                      class="btn btn-primary"
+                      (click)="update(catdetails._id)"
+                    >
+                      Update
+                    </button>
+                  </td>
+                  <td class="cart_delete">
+                    <a
+                      class="btn cart_quantity_delete"
+                      (click)="delete(catdetails._id)"
+                    >
+                      <i class="fa fa-times"></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="pages">
+            <div class="row">
+              <ul class="pagination">
+                <li>
+                  <a class="btn" (click)="getCategoryByPage(1)">First</a>
+                </li>
+                <li>
+                  <a class="btn" (click)="getCategoryByPage(current - 1)"
+                    >Previous</a
+                  >
+                </li>
+                <li *ngIf="current >= 1">
+                  <a class="btn active" (click)="getCategoryByPage(current)">{{
+                    current
+                  }}</a>
+                </li>
+
+                <li>
+                  <a class="btn" (click)="getCategoryByPage(current + 1)"
+                    >Next</a
+                  >
+                </li>
+                <li>
+                  <a class="btn" (click)="getCategoryByPage(pages)">Last</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

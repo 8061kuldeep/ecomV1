@@ -1,0 +1,44 @@
+<section>
+  <div class="container">
+    <div class="padding-right">
+      <div class="product-details">
+        <!--product-details-->
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="view-product">
+              <img
+                src="http://localhost:3000/images/{{ product.image }}"
+                alt="img"
+              />
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="product-information">
+              <h2>{{ product.itemName }}</h2>
+              <p>Web ID: 1089772</p>
+              <span>
+                <span>{{ product.price | currency: "INR" }}</span>
+
+                <button
+                  type="button"
+                  class="btn btn-fefault cart"
+                  *ngIf="result"
+                  (click)="addtocart(product._id)"
+                  [disabled]="condition"
+                >
+                  <i class="fa fa-shopping-cart"></i>
+                  {{ btn }}
+                </button>
+              </span>
+              <p><b>Availability:</b> In Stock</p>
+              <p><b>Condition:</b> New</p>
+              <p><b>Brand:</b> E-SHOPPER</p>
+            </div>
+            <!--/product-information-->
+          </div>
+        </div>
+      </div>
+      <!--/product-details-->
+    </div>
+  </div>
+</section>

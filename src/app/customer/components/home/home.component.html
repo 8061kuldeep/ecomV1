@@ -1,0 +1,67 @@
+<section>
+  <div class="container">
+    <div class="login-form" style="width: 250px; margin: 20px">
+      <form [formGroup]="searchForm">
+        <input
+          type="text"
+          placeholder="search products"
+          formControlName="search"
+        />
+      </form>
+    </div>
+    <div *ngIf="text">
+      <h3>{{ text }}</h3>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 no-padding">
+        <div class="features_items">
+          <div *ngFor="let products of products">
+            <div class="col-sm-4">
+              <div class="product-image-wrapper">
+                <div class="single-products">
+                  <div class="productinfo text-center">
+                    <h3>{{ products.itemName }}</h3>
+                    <img
+                      height="300px"
+                      src="http://localhost:3000/images/{{ products.image }}"
+                      alt="img"
+                    />
+                    <a
+                      [routerLink]="['prodetails', products._id]"
+                      class="btn btn-default category-list"
+                      (click)="view(products._id)"
+                      >View Detail</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--features_items-->
+      </div>
+    </div>
+    <div *ngIf="pages > 1">
+      <div class="row">
+        <ul class="pagination">
+          <li>
+            <a class="btn" (click)="getProductsByPage(1)">First</a>
+          </li>
+          <li>
+            <a class="btn" (click)="getProductsByPage(current - 1)">Previous</a>
+          </li>
+          <li *ngIf="current >= 1">
+            <a class="btn active" (click)="getProductsByPage(current)">{{
+              current
+            }}</a>
+          </li>
+
+          <li>
+            <a class="btn" (click)="getProductsByPage(current + 1)">Next</a>
+          </li>
+          <li><a class="btn" (click)="getProductsByPage(pages)">Last</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,108 @@
+<section id="cart_items">
+  <div>
+    <div>
+      <div class="breadcrumbs">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Order Listing</li>
+        </ol>
+      </div>
+      <div
+        class="table-responsive cart_info"
+        *ngFor="let order of orders; index as ind"
+      >
+        <!-- <div>
+          OrderId: {{ order._id }}
+          <h2>UserName:{{ order.userId.name }}</h2>
+        </div> -->
+        <div>
+          <span style="font-size: 20px">OrderId: {{ order._id }}</span>
+          <span style="margin-left: 200px; font-size: 20px"
+            >UserName:{{ order.userId.name }}</span
+          ><span style="margin-left: 100px">
+            <button (click)="approve(order._id)" class="btn-success">
+              Approve</button
+            >Or<button (click)="reject(order._id)" class="btn-danger">
+              Reject
+            </button>
+          </span>
+        </div>
+        <table class="table table-condensed">
+          <thead>
+            <tr class="cart_menu">
+              <td class="image">Item</td>
+              <td class="description"></td>
+              <td class="price">Price</td>
+              <td class="quantity">Quantity</td>
+              <td class="total">Total: {{ order.total }} With Taxes</td>
+              <td>Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let products of orders[ind].products">
+              <td class="cart_product">
+                <a href=""
+                  ><img
+                    height="100px"
+                    src="http://localhost:3000/images/{{
+                      products.productId.image
+                    }}"
+                    alt="img"
+                /></a>
+              </td>
+              <td class="cart_description">
+                <h4>
+                  <a href="">{{ products.productId.itemName }}</a>
+                </h4>
+              </td>
+              <td class="cart_price">
+                <p>{{ products.productId.price | currency: "INR" }}</p>
+              </td>
+              <td class="cart_quantity">
+                <div class="cart_quantity_button">
+                  <input
+                    class="cart_quantity_input"
+                    type="text"
+                    name="quantity"
+                    value="{{ products.Quantity }}"
+                    autocomplete="off"
+                    size="2"
+                  />
+                </div>
+              </td>
+              <td class="cart_total">
+                <p class="cart_total_price">
+                  {{ products.productId.price | currency: "INR" }}
+                </p>
+              </td>
+              <td style="color: green">{{ order.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="pages > 1">
+        <div class="row">
+          <ul class="pagination">
+            <li>
+              <a class="btn" (click)="getOrdersByPage(1)">First</a>
+            </li>
+            <li>
+              <a class="btn" (click)="getOrdersByPage(current - 1)">Previous</a>
+            </li>
+            <li *ngIf="current >= 1">
+              <a class="btn active" (click)="getOrdersByPage(current)">{{
+                current
+              }}</a>
+            </li>
+
+            <li>
+              <a class="btn" (click)="getOrdersByPage(current + 1)">Next</a>
+            </li>
+            <li><a class="btn" (click)="getOrdersByPage(pages)">Last</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/#cart_items-->
